@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import StudentCard from "./StudentCard";
+import axios from "axios";
 
 export default class StudentList extends Component {
   state = {
@@ -23,9 +24,11 @@ export default class StudentList extends Component {
         currentBlock: "grad",
       },
     ],
+    isLoading: true,
   };
   render() {
-    const { students } = this.state;
+    const { students, isLoading } = this.state;
+    if (isLoading) return <p>The list of students is loading....</p>;
     return (
       <ul>
         {students.map((student) => {
@@ -35,5 +38,17 @@ export default class StudentList extends Component {
     );
   }
 
-  fetchStudents = () => {};
+  componentDidMount() {
+    this.fetchStudents().then((students) => {
+      this.setState({ students, isLoading: false });
+    });
+  }
+
+  fetchStudents = () => {
+    return axios
+      .get("https://nc-student-tracker.herokuapp.com/api/students")
+      .then(({ data }) => {
+        return data.students;
+      });
+  };
 }
