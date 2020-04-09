@@ -1,9 +1,11 @@
 import React from "react";
+import StudentList from "./StudentList";
 
 export default function Students() {
   return (
     <div>
-      <h3>Student List and Student Cards will be displayed here</h3>
+      <h2>List of Current Students</h2>
+      <StudentList />
       <button>Show current block and starting cohort</button>
     </div>
   );
