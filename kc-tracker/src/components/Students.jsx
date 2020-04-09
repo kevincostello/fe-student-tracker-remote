@@ -3,10 +3,9 @@ import StudentList from "./StudentList";
 
 export default function Students() {
   return (
-    <div>
+    <main>
       <h2>List of Current Students</h2>
       <StudentList />
-      <button>Show current block and starting cohort</button>
-    </div>
+    </main>
   );
 }

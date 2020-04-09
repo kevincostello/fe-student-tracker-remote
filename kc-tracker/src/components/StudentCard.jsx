@@ -9,7 +9,7 @@ export default function StudentCard(props) {
         <>
           <h3>{name}</h3>
           <p>Starting Cohort: {startingCohort}</p>
-          <p>Current Block: {currentBlock}</p>{" "}
+          <p>Current Block: {currentBlock}</p>
         </>
       ) : (
         <h3>{name}</h3>
