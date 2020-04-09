@@ -25,16 +25,30 @@ export default class StudentList extends Component {
       },
     ],
     isLoading: true,
+    showMoreInfo: false,
   };
   render() {
-    const { students, isLoading } = this.state;
+    const { students, isLoading, showMoreInfo } = this.state;
+    console.log(showMoreInfo);
+
     if (isLoading) return <p>The list of students is loading....</p>;
     return (
-      <ul>
-        {students.map((student) => {
-          return <StudentCard student={student} key={student._id} />;
-        })}
-      </ul>
+      <>
+        <button onClick={this.flipStudentInfo}>
+          Show current block and starting cohort
+        </button>
+        <ul>
+          {students.map((student) => {
+            return (
+              <StudentCard
+                student={student}
+                key={student._id}
+                showMoreInfo={showMoreInfo}
+              />
+            );
+          })}
+        </ul>
+      </>
     );
   }
 
@@ -50,5 +64,11 @@ export default class StudentList extends Component {
       .then(({ data }) => {
         return data.students;
       });
+  };
+
+  flipStudentInfo = () => {
+    this.setState((currentState) => {
+      return { showMoreInfo: !currentState.showMoreInfo };
+    });
   };
 }
